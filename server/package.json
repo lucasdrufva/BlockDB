@@ -1,0 +1,19 @@
+{
+  "name": "blockdb",
+  "version": "1.0.0",
+  "description": "Blockchain based database",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Lucas Drufva",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "crypto-js": "^3.1.9-1",
+    "express": "^4.16.3",
+    "fs": "0.0.1-security",
+    "request": "^2.85.0"
+  }
+}
