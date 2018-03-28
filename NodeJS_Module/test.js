@@ -2,7 +2,7 @@ var blockdb = require('./index');
 
 blockdb.connect("localhost:8080", "root", "root");
 
-blockdb.write("test", "string", "test43");
+blockdb.write("test", "string", "It works");
 var deasync = require('deasync');
 
 /*function syncFunc()
