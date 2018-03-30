@@ -14,5 +14,10 @@ var blockdb = require('blockdb');
 #Connect to server
 blockdb.connect(ip, username, password);
 
+#Write to database
+blockdb.write(name, datatype, data);
+
+#Read from database
+var data = blockdb.read(name).data;
 
 ```
