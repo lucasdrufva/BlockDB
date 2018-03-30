@@ -7,16 +7,31 @@
 var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var fs = require('fs');
+const SHA256 = require("crypto-js/sha256");
 var text = fs.readFileSync('settings.txt','utf8');
 var settings = JSON.parse(text);
+if (process.argv[2] === "-p" || process.argv[2] === "--port") {
+  settings[0] = parseInt(process.argv[3]);
+  fs.writeFileSync('./settings.txt', JSON.stringify(settings));
+}
+if (process.argv[2] === "-u" || process.argv[2] === "--adduser") {
+  var username = process.argv[3];
+  var password = SHA256(process.argv[4]).toString();
+  var text = fs.readFileSync('users.txt','utf8');
+  var users = JSON.parse(text);
+  var newUser = JSON.parse('{"user":"' + username + '", "pass":"' + password + '"}');
+  users.push(newUser);
+  console.log(users);
+  fs.writeFileSync('./users.txt', JSON.stringify(users));
+}
 var port = process.env.PORT || settings[0];
 const bc = require('./blockchain');
-const SHA256 = require("crypto-js/sha256");
 var request = require('request');
 var bodyParser = require('body-parser');
 var authlevel = settings[1]; //0 = no authentication, 1 = authentication needed only to write, 2 = authentication needed for both reed and write
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: false }));
+
 
 class Block {
   constructor(index, timestamp, data, previousHash = '') {
